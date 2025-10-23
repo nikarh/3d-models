@@ -10,11 +10,11 @@ t_br = t_w / 2;
 
 sq_w = 8.4; // 6? 5.6?
 sq_l = 10; //7.5
-sq_wall = 1.35;
+sq_wall = 1.2;
 sq_hh = 5.7 + (t_h - t_wall); // 9.8 = t_h + sq_h - t_wall
 sq_h = 5.7 + 2;
 
-han_l = 6;
+han_l = 4.8;
 han_h = 4;
 han_r = han_h/2;
 
@@ -35,8 +35,8 @@ difference() {
 // Tube chamber
 down(sq_hh/2 + t_wall)
     rect_tube(
-        size=[sq_w, sq_l], 
-        wall=sq_wall, h=sq_hh, 
+        size=[sq_w, sq_l],
+        wall=sq_wall, h=sq_hh,
         rounding=1, irounding=0, $fn=10);
         
 

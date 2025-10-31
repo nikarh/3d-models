@@ -6,8 +6,19 @@ set -e
 echo "Generating previews..."
 find . -name "*.scad" -print0 | while IFS= read -r -d '' file; do
     if [ -f "$file" ]; then
-        echo "Generating preview for $file..."
-        openscad -o "${file%.scad}_preview.png" "$file" --enable predictible-output --backend Manifold --render=true
+        preview_file="${file%.scad}_preview.png"
+        if [ -f "$preview_file" ]; then
+            echo "Preview already exists for $file, skipping..."
+        else
+            echo "Generating preview for $file..."
+            openscad -o "$preview_file" "$file" \
+                --enable predictible-output \
+                --backend Manifold \
+                --render=true \
+                --view=axes
+                # --colorscheme=BeforeDawn \
+                # --view=axes,edges
+        fi
     fi
 done
 

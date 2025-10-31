@@ -1,9 +1,9 @@
 include <BOSL2/std.scad>
 include <BOSL2/walls.scad>
 
-$vpr = [65, 0, 145];
-$vpt = [-120, 0, 40];
-$vpd = 1300;
+//$vpr = [65, 0, 145];
+//$vpt = [-120, 0, 40];
+//$vpd = 1300;
 
 $fn=14;
 
@@ -31,9 +31,9 @@ module inlay() {
 //up(15)yrot(90)
  #left(width + 40) hex_panel(
     rect([width - back_wall*2 - 0.8, depth - back_wall*2 - 0.8], rounding=b_radius * [1,1,0,0]),
-    1.3, 15,
+    2, 15,
     frame = 3,
-    h = 2);
+    h = 3);
 }
 
 module main_box() {

@@ -40,6 +40,10 @@ This repository contains a collection of 3D models and designs created with Open
 ![Preview](2025.10.30%20-%20Table%20Hole%20Plug/bolts_preview.png)
 ![Preview](2025.10.30%20-%20Table%20Hole%20Plug/table_hole_plug_preview.png)
 
+### [Funnel](2025.10.31%20-%20Funnel)
+
+![Preview](2025.10.31%20-%20Funnel/funnel_preview.png)
+
 ## Licensing
 
 - **Source Code**: The OpenSCAD source files (`.scad`) are licensed under the [GNU General Public License v2.0](LICENSE-GPL)

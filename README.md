@@ -44,6 +44,18 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.10.31%20-%20Funnel/funnel_preview.png)
 
+### [Fan Cap](2025.11.01%20-%20Fan%20Cap)
+
+![Preview](2025.11.01%20-%20Fan%20Cap/fan-cap_preview.png)
+
+### [Magnifying Glass Holder](2025.11.01%20-%20Magnifying%20Glass%20Holder)
+
+![Preview](2025.11.01%20-%20Magnifying%20Glass%20Holder/mag-glass_preview.png)
+
+### [Nursery Pot Stand](2025.11.01%20-%20Nursery%20Pot%20Stand)
+
+![Preview](2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
+
 ## Licensing
 
 - **Source Code**: The OpenSCAD source files (`.scad`) are licensed under the [GNU General Public License v2.0](LICENSE-GPL)

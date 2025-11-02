@@ -56,6 +56,10 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
 
+### [Vacuum Holder](2025.11.02%20-%20Vacuum%20Holder)
+
+![Preview](2025.11.02%20-%20Vacuum%20Holder/vacuum-holder_preview.png)
+
 ## Licensing
 
 - **Source Code**: The OpenSCAD source files (`.scad`) are licensed under the [GNU General Public License v2.0](LICENSE-GPL)

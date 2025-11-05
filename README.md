@@ -60,6 +60,14 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.02%20-%20Vacuum%20Holder/vacuum-holder_preview.png)
 
+### [Dip Tray](2025.11.03%20-%20Dip%20Tray)
+
+![Preview](2025.11.03%20-%20Dip%20Tray/dip_tray_preview.png)
+
+### [Box](2025.11.04%20-%20Box)
+
+![Preview](2025.11.04%20-%20Box/box_preview.png)
+
 ## Licensing
 
 - **Source Code**: The OpenSCAD source files (`.scad`) are licensed under the [GNU General Public License v2.0](LICENSE-GPL)

@@ -16,16 +16,6 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.10.23%20-%20Tap%20Handle/tap_handle_preview.png)
 
-### [Nursery Pot Drainage](2025.10.24%20-%20Nursery%20Pot%20Drainage)
-
-![Preview](2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
-
-### [Vent Hole Plug](2025.10.26%20-%20Vent%20Hole%20Plug)
-
-![Preview](2025.10.26%20-%20Vent%20Hole%20Plug/stand_preview.png)
-![Preview](2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-simple_preview.png)
-![Preview](2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-threaded_preview.png)
-
 ### [Threading Experiments](2025.10.27%20-%20Threading%20Experiments)
 
 ![Preview](2025.10.27%20-%20Threading%20Experiments/threading_experiments2_preview.png)
@@ -44,17 +34,9 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.10.31%20-%20Funnel/funnel_preview.png)
 
-### [Fan Cap](2025.11.01%20-%20Fan%20Cap)
-
-![Preview](2025.11.01%20-%20Fan%20Cap/fan-cap_preview.png)
-
 ### [Magnifying Glass Holder](2025.11.01%20-%20Magnifying%20Glass%20Holder)
 
 ![Preview](2025.11.01%20-%20Magnifying%20Glass%20Holder/mag-glass_preview.png)
-
-### [Nursery Pot Stand](2025.11.01%20-%20Nursery%20Pot%20Stand)
-
-![Preview](2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
 
 ### [Vacuum Holder](2025.11.02%20-%20Vacuum%20Holder)
 
@@ -76,10 +58,28 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.08%20-%20Angle%20Jig/l-jig_preview.png)
 
-### [light cap](2025.11.09%20-%20light%20cap)
+### [Basil Box/2025.10.24 - Nursery Pot Drainage](Basil%20Box/2025.10.24%20-%20Nursery%20Pot%20Drainage)
 
-![Preview](2025.11.09%20-%20light%20cap/light%20cap-left_preview.png)
-![Preview](2025.11.09%20-%20light%20cap/light%20cap-right_preview.png)
+![Preview](Basil%20Box/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
+
+### [Basil Box/2025.10.26 - Vent Hole Plug](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug)
+
+![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/stand_preview.png)
+![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-simple_preview.png)
+![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-threaded_preview.png)
+
+### [Basil Box/2025.11.01 - Fan Cap](Basil%20Box/2025.11.01%20-%20Fan%20Cap)
+
+![Preview](Basil%20Box/2025.11.01%20-%20Fan%20Cap/fan-cap_preview.png)
+
+### [Basil Box/2025.11.01 - Nursery Pot Stand](Basil%20Box/2025.11.01%20-%20Nursery%20Pot%20Stand)
+
+![Preview](Basil%20Box/2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
+
+### [Basil Box/2025.11.09 - Light Cap](Basil%20Box/2025.11.09%20-%20Light%20Cap)
+
+![Preview](Basil%20Box/2025.11.09%20-%20Light%20Cap/light%20cap-left_preview.png)
+![Preview](Basil%20Box/2025.11.09%20-%20Light%20Cap/light%20cap-right_preview.png)
 
 ## Licensing
 

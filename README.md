@@ -64,9 +64,22 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.03%20-%20Dip%20Tray/dip_tray_preview.png)
 
-### [Box](2025.11.04%20-%20Box)
+### [SMD Box](2025.11.04%20-%20SMD%20Box)
 
-![Preview](2025.11.04%20-%20Box/box_preview.png)
+![Preview](2025.11.04%20-%20SMD%20Box/box_preview.png)
+
+### [IKEA 365 Silica Bead Box](2025.11.07%20-%20IKEA%20365%20Silica%20Bead%20Box)
+
+![Preview](2025.11.07%20-%20IKEA%20365%20Silica%20Bead%20Box/bead-box_preview.png)
+
+### [Angle Jig](2025.11.08%20-%20Angle%20Jig)
+
+![Preview](2025.11.08%20-%20Angle%20Jig/l-jig_preview.png)
+
+### [light cap](2025.11.09%20-%20light%20cap)
+
+![Preview](2025.11.09%20-%20light%20cap/light%20cap-left_preview.png)
+![Preview](2025.11.09%20-%20light%20cap/light%20cap-right_preview.png)
 
 ## Licensing
 

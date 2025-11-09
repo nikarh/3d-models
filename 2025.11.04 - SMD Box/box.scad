@@ -2,18 +2,21 @@ include <BOSL2/std.scad>
 
 //import("/home/nikarh/Parametric Box 120x80x40_2x2.3mf");
 
+// l, wl, h, segments, margin, grip_w
+tiny_box = [60, 40, 14, 2, 1, 14];
+cap_box = [168, 95, 36, 3, 10, 26];
+ind_box = [168, 95, 30, 3, 10, 26];
+dio_box = [168, 95, 16, 3, 10, 26];
+
+box = cap_box;
+
 thickness = 0.8; // Outer box thickness
+lid_thickness = 1.6;
 separator_thickness = 0.8; // Thickness of separators
 
-// Small
-
-// height = 14;
-// length = 60;
-// width = 40;
-
-height = 36;
-length = 168;
-width = 95;
+height = box[2];
+length = box[0];
+width = box[1];
 
 // Main box border radius top down.
 // Other radii are calculated from that and thickness
@@ -32,17 +35,17 @@ skirt_tear_h = latch_r / tan(latch_tear_a / 2); // + thickness / tan(latch_tear_
 // Total height of the skirt including chamfer/radius
 skirt_h = skirt_tear_h + skirt_bottom_r;
 skirt_dh = skirt_tear_h; // Clearance in mm from the top
-lid_h = skirt_tear_h + box_bottom_r;
+lid_h = skirt_tear_h + box_bottom_r + lid_thickness - thickness;
 
-latch_box_segments = 3; // 2
+latch_box_segments = box[3];
 latch_lid_segments = latch_box_segments - 1;
 latch_segments = latch_box_segments + latch_lid_segments;
-latch_margin = 10; // 1; // left-right margin along length side starting from the end of the rounding
+latch_margin = box[4]; // left-right margin along length side starting from the end of the rounding
 latch_tolerance = 0.2; // Tolerance from each side between segments
 latch_length = (length - outer_radius * 2 - latch_margin * 2 - (latch_segments - 1) * latch_tolerance) / latch_segments;
 latch_rod_length = latch_length * latch_segments + latch_tolerance * (latch_segments - 1);
 
-grip_w = 26;
+grip_w = box[5];
 grip_w_t = grip_w + 0.01; // Add tolerance
 
 module filled_box(height = height, d = 0, top) {
@@ -58,19 +61,25 @@ module filled_box(height = height, d = 0, top) {
   );
 }
 
-module hollow_box(height, d = 0, outer_top, inner_top) {
+module hollow_box(
+  height, // full height
+  floor_thickness = thickness,
+  d = 0, // x-y delta
+  outer_top, // chamfer
+  inner_top // chamfer
+) {
   difference() {
     // Body of the box
     filled_box(height=height, d=d, top=outer_top);
 
     // Remove the insides
-    up(thickness)
+    up(floor_thickness)
       offset_sweep(
         round_corners(
           rect([length - thickness * 2 + d * 2, width - thickness * 2 + d * 2]),
           radius=outer_radius - thickness / 2 + d, $fs=0.5, $fa=0.5
         ),
-        height=height,
+        height=height - floor_thickness + thickness,
         check_valid=false, steps=4,
         bottom=os_teardrop(r=box_bottom_r),
         top=inner_top
@@ -116,7 +125,7 @@ module xwall(l, t = [0, 0]) {
 
 // Draw walls, and 
 intersection() {
-  union() {
+  *union() {
     // First wall is at 36
     right(36) ywall();
 
@@ -132,6 +141,9 @@ intersection() {
     xwall(36, [0, +(width / 2 - width / 3 - 0.5)]);
     xwall(length - 36, [36, 0]);
   }
+
+  wc = 5;
+  xcopies(n=wc, spacing=(length-thickness*2) / (wc+1)) right(length / 2 - separator_thickness / 2) ywall();
 
   // Intersect walls with the main box, otherwise they will clip through chamfers
   filled_box(top=os_chamfer(height=0.4));
@@ -190,7 +202,12 @@ color("red")
 //up(height + lid_h - skirt_dh) xrot(180)
 left(length + 10)
   union() {
-    hollow_box(height=lid_h, d=thickness, inner_top=os_chamfer(height=-1.2));
+    hollow_box(
+      height=lid_h,
+      floor_thickness=lid_thickness,
+      d=thickness,
+      inner_top=os_chamfer(height=-1.2)
+    );
     color("red")
       xcopies(spacing=(latch_length + latch_tolerance) * 2, n=latch_lid_segments)
         move([0, -(width + latch_d) / 2 - thickness, lid_h])

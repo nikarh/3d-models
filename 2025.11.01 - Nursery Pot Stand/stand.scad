@@ -1,6 +1,8 @@
 include <BOSL2/std.scad>
 include <BOSL2/screws.scad>
 
+// TODO: too thin, also needs fins for support
+
 $fa = 1;
 $fs = 0.5;
 

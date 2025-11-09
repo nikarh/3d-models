@@ -1,6 +1,11 @@
 include <BOSL2/std.scad>
 include <BOSL2/walls.scad>
 
+
+// TODO: this prints like shit,
+// roundover is an overhang >45 degrees and must be turned into a chamfer
+// or a teardrop
+
 $fa = 1;
 $fs = 0.5;
 
@@ -102,13 +107,3 @@ difference() {
 
   #move([fan_side / 2 - 20, fan_side / 2, wire_h / 2]) cuboid([wire_w, 30, wire_h]);
 }
-
-// rect_tube(
-//   h=w,
-//   isize=fan_side,
-//   size =osize
-// );
-
-// left(fan_side + 10) {
-//   cuboid([osize, osize, w]);
-// }

@@ -5,7 +5,7 @@ include <BOSL2/std.scad>
 $fa = 0.5;
 $fs = 0.5;
 
-l = 30; // part length
+l = 40; // part length
 zd = 10; // tube diameter from bottom to top
 yr = 5; // tube raidus from front to back
 
@@ -25,39 +25,16 @@ h_h = 1.8;
 round_e = h_h + 1.4;
 
 difference() {
-  union() {
-    difference() {
-      union() {
-        // Body
-        cuboid([l, d, w]);
-
-        // Bottom Roundover
-        back(d / 2) down(w / 2 - round_e) xrot(90) yrot(90)
-                linear_extrude(height=l, center=true)
-                  mask2d_roundover(r=zd, excess=round_e);
-
-        // Bottom holder
-        bhl = real_h_l - d - zd + 2;
-        move([0, d / 2 + bhl / 2 + zd, -w / 2 + round_e / 2]) cuboid([l, bhl, round_e]);
-      }
-
-      // Cut out hole for a screw
-      back(-d / 2 + real_h_l - 3) union() {
+  diff() {
+    // Body
+    cuboid([l, d, w]);
+    #tag("remove") move([-l / 2 + 6.4 +2, 8 - 3, 0]) rot([-90, 90, 0]) {
           down(5) xrot(-90) yrot(-90)
-                teardrop(d=3.4, h=6, cap_h=1.6, ang=45);
+                teardrop(d=3.4, h=16, cap_h=1.6, ang=45);
 
           down(3) xrot(-90) yrot(-90)
-                teardrop(d=6.4, h=4, cap_h=3.2, ang=45);
+                teardrop(d1=6.4, d2=3.4, h=4, cap_h=3.2, ang=45);
         }
-    }
-
-    // Support
-    move([(l - d) / 2 - h_w / 2 - 2, h_l / 2, -w / 2 + 1])
-      cuboid([h_w - 0.8, real_h_l - 1.8, 1.4]) {
-        // Breakables
-        attach(LEFT, TOP) xcopies(n=5, spacing=3) cuboid(0.4);
-        attach(RIGHT, TOP) xcopies(n=5, spacing=3) cuboid(0.4);
-      }
   }
   fwd(d / 2)
     // And now remove the cyllinder

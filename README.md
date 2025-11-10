@@ -62,11 +62,11 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](Basil%20Box/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
 
-### [Basil Box/2025.10.26 - Vent Hole Plug](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug)
+### [Basil Box/2025.10.26 - Air Intake Plug](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug)
 
-![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/stand_preview.png)
-![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-simple_preview.png)
-![Preview](Basil%20Box/2025.10.26%20-%20Vent%20Hole%20Plug/table-hole-plug-threaded_preview.png)
+![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/stand_preview.png)
+![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-simple_preview.png)
+![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-threaded_preview.png)
 
 ### [Basil Box/2025.11.01 - Fan Cap](Basil%20Box/2025.11.01%20-%20Fan%20Cap)
 

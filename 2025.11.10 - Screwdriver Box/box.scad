@@ -1,18 +1,11 @@
 include <BOSL2/std.scad>
 
-//import("/home/nikarh/Parametric Box 120x80x40_2x2.3mf");
-
 // l, wl, h, segments, margin, grip_w
-tiny_box = [60, 40, 14, 2, 1, 14];
-cap_box = [168, 95, 36, 3, 10, 26];
-ind_box = [168, 95, 30, 3, 10, 26];
-dio_box = [168, 95, 16, 3, 10, 26];
+box = [154, 88, 50, 3, 10, 22];
 
-box = cap_box;
-
-thickness = 0.8; // Outer box thickness
+box_wall_thickness = 1.4; // Outer box thickness
 lid_thickness = 1.6;
-separator_thickness = 0.8; // Thickness of separators
+separator_thickness = 1.0; // Thickness of separators
 
 height = box[2];
 length = box[0];
@@ -31,11 +24,11 @@ latch_tear_a = 45; // Latch teardrop angle
 latch_hole_d = 1.2;
 // Skirt
 skirt_bottom_r = 2; // Bottom chamfer
-skirt_tear_h = latch_r / tan(latch_tear_a / 2); // + thickness / tan(latch_tear_a);
+skirt_tear_h = latch_r / tan(latch_tear_a / 2); // + box_wall_thickness / tan(latch_tear_a);
 // Total height of the skirt including chamfer/radius
 skirt_h = skirt_tear_h + skirt_bottom_r;
 skirt_dh = skirt_tear_h; // Clearance in mm from the top
-lid_h = skirt_tear_h + box_bottom_r + lid_thickness - thickness;
+lid_h = skirt_tear_h + box_bottom_r + lid_thickness - box_wall_thickness;
 
 latch_box_segments = box[3];
 latch_lid_segments = latch_box_segments - 1;
@@ -48,22 +41,57 @@ latch_rod_length = latch_length * latch_segments + latch_tolerance * (latch_segm
 grip_w = box[5];
 grip_w_t = grip_w + 0.01; // Add tolerance
 
-module filled_box(height = height, d = 0, top) {
+// L, W, H are OUTER sizes, so they include thickness
+module rounded_box(
+  l, // length along X axis
+  w, // width along Y axis
+  h, // height along Z axis
+  br = 0, // border radii top down view
+  top, // top chamfer
+  bottom // bottom chamfer
+) {
   offset_sweep(
-    round_corners(
-      rect([length + d * 2, width + d * 2]),
-      radius=outer_radius + d, $fs=0.5, $fa=0.5
-    ),
-    height=height,
+    round_corners(rect([l, w]), radius=br, $fs=0.5, $fa=0.5),
+    height=h,
     check_valid=false, steps=4,
-    top=top,
-    bottom=os_teardrop(r=box_bottom_r),
+    top=top, bottom=bottom,
   );
 }
 
 module hollow_box(
+  l, // length along X axis
+  w, // width along Y axis
+  h, // height along Z axis
+  wt, // wall thickness
+  ft = wt, // floor thickness
+  br = 0, //  border radii top down view
+  outer_top = undef, // outer top chamfer
+  inner_top = undef, // inner top chamfer
+  outer_bottom = undef, // outer bottom chamfer
+  inner_bottom = undef, // inner bottom chamfer
+) {
+  epsilon = 0.01; // helps with visual artifacts before render
+
+  _inner_bottom = (ft > 0 && !is_def(inner_bottom)) ? outer_bottom : inner_bottom;
+  _ft = (ft == 0) ? -epsilon : ft;
+
+  difference() {
+    // Body of the box
+    rounded_box(l=l, w=w, h=h, br=br, top=outer_top, bottom=_inner_bottom);
+
+    // Remove the insides
+    up(_ft) // Bump it up for floor thickness
+      rounded_box(l=l - wt * 2, w=w - wt * 2, h=h - ft + epsilon * 2, br=br - wt / 2, top=inner_top, bottom=inner_bottom);
+  }
+}
+
+// Main body
+hollow_box(l=length, w=width, h=height, wt=box_wall_thickness, ft=0, br=outer_radius);
+
+/*
+module hollow_box(
   height, // full height
-  floor_thickness = thickness,
+  floor_thickness = box_wall_thickness,
   d = 0, // x-y delta
   outer_top, // chamfer
   inner_top // chamfer
@@ -76,10 +104,10 @@ module hollow_box(
     up(floor_thickness)
       offset_sweep(
         round_corners(
-          rect([length - thickness * 2 + d * 2, width - thickness * 2 + d * 2]),
-          radius=outer_radius - thickness / 2 + d, $fs=0.5, $fa=0.5
+          rect([length - box_wall_thickness * 2 + d * 2, width - box_wall_thickness * 2 + d * 2]),
+          radius=outer_radius - box_wall_thickness / 2 + d, $fs=0.5, $fa=0.5
         ),
-        height=height - floor_thickness + thickness,
+        height=height - floor_thickness + box_wall_thickness,
         check_valid=false, steps=4,
         bottom=os_teardrop(r=box_bottom_r),
         top=inner_top
@@ -110,65 +138,26 @@ module latch(side = 1) {
 // Main box body
 hollow_box(height=height, d=0, outer_top=os_chamfer(height=0.4));
 
-// Walls
-module ywall() {
-  left(length / 2 - separator_thickness / 2) intersection() {
-      up(height / 2 + thickness / 2) cuboid([separator_thickness, width, height - thickness]);
-    }
-}
-
-module xwall(l, t = [0, 0]) {
-  left(length / 2 - l / 2) intersection() {
-      move(t) up(height / 2 + thickness / 2) cuboid([l, separator_thickness, height - thickness]);
-    }
-}
-
-// Draw walls, and 
-intersection() {
-  *union() {
-    // First wall is at 36
-    right(36) ywall();
-
-    // Next 3 walls separate remaining space equally
-    remain_x = length - 36 - 2 * thickness - separator_thickness * 4;
-    each_x = remain_x / 4;
-
-    right(36 + (each_x + separator_thickness) * 1) ywall();
-    right(36 + (each_x + separator_thickness) * 2) ywall();
-    right(36 + (each_x + separator_thickness) * 3) ywall();
-
-    xwall(36, [0, -(width / 2 - width / 3 - 0.5)]);
-    xwall(36, [0, +(width / 2 - width / 3 - 0.5)]);
-    xwall(length - 36, [36, 0]);
-  }
-
-  wc = 5;
-  xcopies(n=wc, spacing=(length-thickness*2) / (wc+1)) right(length / 2 - separator_thickness / 2) ywall();
-
-  // Intersect walls with the main box, otherwise they will clip through chamfers
-  filled_box(top=os_chamfer(height=0.4));
-}
-
 // Latching mechanism
 
-skirt_w = width + thickness * 2;
-skirt_l = length + thickness * 2;
-skirt_r = outer_radius + thickness;
-skirt_r2 = thickness / 2.1;
+skirt_w = width + box_wall_thickness * 2;
+skirt_l = length + box_wall_thickness * 2;
+skirt_r = outer_radius + box_wall_thickness;
+skirt_r2 = box_wall_thickness / 2.1;
 
 // Skirt
 up(height - skirt_dh - skirt_h) difference() {
     move([-skirt_l / 2, -skirt_w / 2]) offset_sweep(
         round_corners(
-          // rect([length + thickness * 2, width + thickness * 2]),
+          // rect([length + box_wall_thickness * 2, width + box_wall_thickness * 2]),
           [
             [0, 0],
             [0, skirt_w],
             [skirt_l, skirt_w],
             [skirt_l, 0],
             [(skirt_l + grip_w_t) / 2, 0], // recess
-            [(skirt_l + grip_w_t) / 2, thickness], // recess
-            [(skirt_l - grip_w_t) / 2, thickness], // recess
+            [(skirt_l + grip_w_t) / 2, box_wall_thickness], // recess
+            [(skirt_l - grip_w_t) / 2, box_wall_thickness], // recess
             [(skirt_l - grip_w_t) / 2, 0], // recess
           ],
           radius=[
@@ -194,7 +183,7 @@ up(height - skirt_dh - skirt_h) difference() {
 color("red")
   down(skirt_dh)
     xcopies(spacing=(latch_length + latch_tolerance) * 2, n=latch_box_segments)
-      move([0, (width + latch_d) / 2 + thickness, height])
+      move([0, (width + latch_d) / 2 + box_wall_thickness, height])
         rot([90, 180 + latch_tear_a / 2, 90]) latch();
 
 
@@ -205,18 +194,19 @@ left(length + 10)
     hollow_box(
       height=lid_h,
       floor_thickness=lid_thickness,
-      d=thickness,
+      d=box_wall_thickness,
       inner_top=os_chamfer(height=-1.2)
     );
     color("red")
       xcopies(spacing=(latch_length + latch_tolerance) * 2, n=latch_lid_segments)
-        move([0, -(width + latch_d) / 2 - thickness, lid_h])
+        move([0, -(width + latch_d) / 2 - box_wall_thickness, lid_h])
           rot([90, 180 - latch_tear_a / 2, 90]) latch(-1);
-    move([0, width / 2 + thickness * 1.5, skirt_tear_h / 2 + box_bottom_r]) xrot(-90) diff()
-          wedge([grip_w, skirt_tear_h, thickness], center=true)
+    move([0, width / 2 + box_wall_thickness * 1.5, skirt_tear_h / 2 + box_bottom_r]) xrot(-90) diff()
+          wedge([grip_w, skirt_tear_h, box_wall_thickness], center=true)
             attach("top_edge", FWD + LEFT, inside=true)
-              rounding_edge_mask(r=thickness / 1.5, l=$edge_length + 1, $fn=32);
+              rounding_edge_mask(r=box_wall_thickness / 1.5, l=$edge_length + 1, $fn=32);
   }
 
 // fwd(width)
 //   yrot(90) cyl(d=latch_hole_d - 0.4, l=latch_rod_length, $fn=32);
+*/

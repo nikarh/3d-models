@@ -48,7 +48,10 @@ This repository contains a collection of 3D models and designs created with Open
 
 ### [SMD Box](2025.11.04%20-%20SMD%20Box)
 
-![Preview](2025.11.04%20-%20SMD%20Box/box_preview.png)
+![Preview](2025.11.04%20-%20SMD%20Box/th_capacitor_box_preview.png)
+![Preview](2025.11.04%20-%20SMD%20Box/th_diode_box_preview.png)
+![Preview](2025.11.04%20-%20SMD%20Box/th_inductor_box_preview.png)
+![Preview](2025.11.04%20-%20SMD%20Box/tiny_box_v1_preview.png)
 
 ### [IKEA 365 Silica Bead Box](2025.11.07%20-%20IKEA%20365%20Silica%20Bead%20Box)
 
@@ -58,28 +61,37 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.08%20-%20Angle%20Jig/l-jig_preview.png)
 
-### [Basil Box/2025.10.24 - Nursery Pot Drainage](Basil%20Box/2025.10.24%20-%20Nursery%20Pot%20Drainage)
+### [Screwdriver Box](2025.11.10%20-%20Screwdriver%20Box)
 
-![Preview](Basil%20Box/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
+![Preview](2025.11.10%20-%20Screwdriver%20Box/box_preview.png)
 
-### [Basil Box/2025.10.26 - Air Intake Plug](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug)
+### [Basil Cabinet/2025.10.24 - Nursery Pot Drainage](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage)
 
-![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/stand_preview.png)
-![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-simple_preview.png)
-![Preview](Basil%20Box/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-threaded_preview.png)
+![Preview](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
 
-### [Basil Box/2025.11.01 - Fan Cap](Basil%20Box/2025.11.01%20-%20Fan%20Cap)
+### [Basil Cabinet/2025.10.26 - Air Intake Plug](Basil%20Cabinet/2025.10.26%20-%20Air%20Intake%20Plug)
 
-![Preview](Basil%20Box/2025.11.01%20-%20Fan%20Cap/fan-cap_preview.png)
+![Preview](Basil%20Cabinet/2025.10.26%20-%20Air%20Intake%20Plug/stand_preview.png)
+![Preview](Basil%20Cabinet/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-simple_preview.png)
+![Preview](Basil%20Cabinet/2025.10.26%20-%20Air%20Intake%20Plug/table-hole-plug-threaded_preview.png)
 
-### [Basil Box/2025.11.01 - Nursery Pot Stand](Basil%20Box/2025.11.01%20-%20Nursery%20Pot%20Stand)
+### [Basil Cabinet/2025.11.01 - Fan Cap](Basil%20Cabinet/2025.11.01%20-%20Fan%20Cap)
 
-![Preview](Basil%20Box/2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
+![Preview](Basil%20Cabinet/2025.11.01%20-%20Fan%20Cap/fan-cap_preview.png)
 
-### [Basil Box/2025.11.09 - Light Cap](Basil%20Box/2025.11.09%20-%20Light%20Cap)
+### [Basil Cabinet/2025.11.01 - Nursery Pot Stand](Basil%20Cabinet/2025.11.01%20-%20Nursery%20Pot%20Stand)
 
-![Preview](Basil%20Box/2025.11.09%20-%20Light%20Cap/light%20cap-left_preview.png)
-![Preview](Basil%20Box/2025.11.09%20-%20Light%20Cap/light%20cap-right_preview.png)
+![Preview](Basil%20Cabinet/2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
+
+### [Basil Cabinet/2025.11.09 - Light Cap](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap)
+
+![Preview](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap/light%20cap-left_preview.png)
+![Preview](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap/light%20cap-right_preview.png)
+
+### [modules/box](modules/box)
+
+![Preview](modules/box/util_preview.png)
+![Preview](modules/box/v1_preview.png)
 
 ## Licensing
 

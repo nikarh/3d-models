@@ -88,11 +88,6 @@ This repository contains a collection of 3D models and designs created with Open
 ![Preview](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap/light%20cap-left_preview.png)
 ![Preview](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap/light%20cap-right_preview.png)
 
-### [modules/box](modules/box)
-
-![Preview](modules/box/util_preview.png)
-![Preview](modules/box/v1_preview.png)
-
 ## Licensing
 
 - **Source Code**: The OpenSCAD source files (`.scad`) are licensed under the [GNU General Public License v2.0](LICENSE-GPL)

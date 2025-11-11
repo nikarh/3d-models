@@ -4,7 +4,7 @@ set -e
 
 # Generate previews for all .scad files
 echo "Generating previews..."
-find . -name "*.scad" -print0 | while IFS= read -r -d '' file; do
+find . -type f -name "*.scad" ! -path "*/modules/*" -print0 | while IFS= read -r -d '' file; do
     if [ -f "$file" ]; then
         preview_file="${file%.scad}_preview.png"
         if [ -f "$preview_file" ]; then
@@ -35,8 +35,8 @@ awk '/^## Parts/{exit} /^## Licensing/{exit} {print}' README.md > "$temp_readme"
 echo "## Parts" >> "$temp_readme"
 echo "" >> "$temp_readme"
 
-# Find all directories containing .scad files (excluding root directory)
-find . -mindepth 2 -name "*.scad" -print0 | while IFS= read -r -d '' file; do
+# Find all directories containing .scad files (excluding root directory and modules folder)
+find . -mindepth 2 -type f -name "*.scad" ! -path "*/modules/*" -print0 | while IFS= read -r -d '' file; do
     echo "$(dirname "$file")"
 done | sort -u | while read -r dir; do
     # Remove leading "./" and get folder name

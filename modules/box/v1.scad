@@ -1,12 +1,21 @@
 include <BOSL2/std.scad>
 include <util.scad>
 
+BOX = 1;
+LID = 2;
+HIDE_HINGES = 4;
+
 module box_v1(
   size,
   grip_l, // grip length for a finger to latch
   wall_t = 0.8, // wall thickness
-  lid_t = 1.6, // lid thickness
   floor_t = 0.8, // floor thickness
+  lid_oversize = 0, // protrude lid above the box
+  lid_overlap = 10, // reduces box height by that amount and increases lid height
+  lid_wall_t = 0.8, // lid wall thickness
+  lid_floor_t = 1.6, // lid floor thickness
+  lid_tolerance = 0, // increases lid size by that amount
+  lid_vertical_clearance = 0.4, // decrease lid height by that amount
   radius = 9, // outer radius
   hinge_d = 3, // outer diameter of the hinge
   hinge_hole_d = 1.2, // hinge hole diameter
@@ -16,101 +25,141 @@ module box_v1(
   hinge_tolerance = 0.2, // space between each hinge edge
   box_top_profile = os_chamfer(height=0.4), // offset sweep profile
   box_bottom_r = 0.4, // bottom teardrop radius
+  draw = BOX + LID,
 ) {
+  draw_box = (draw % 2) >= BOX;
+  draw_lid = (draw % 4) >= LID;
+  draw_hinges = (draw % 8) < HIDE_HINGES;
+
   l = size[0];
   w = size[1];
   h = size[2];
 
   box_bottom_profile = os_teardrop(box_bottom_r);
 
-  // Main body
-  hollow_box(
-    l=l,
-    w=w,
-    h=h,
-    wt=wall_t,
-    ft=floor_t,
-    br=radius,
-    outer_top=box_top_profile,
-    outer_bottom=box_bottom_profile,
-  );
-
   // Calculate height of the skirt based on the hinge size
   skirt_bottom_r = 2; // Bottom profile
   skirt_tear_h = (hinge_d / 2) / tan(hinge_ang / 2);
   skirt_h = skirt_tear_h + skirt_bottom_r;
 
-  // Attach skirt
-  up(h - skirt_tear_h - skirt_h)
-    skirt(
-      l=l + wall_t * 2,
-      w=w + wall_t * 2,
-      h=skirt_h,
-      t=wall_t,
-      gl=grip_l,
-      br=radius + wall_t,
-      bottom=os_teardrop(r=skirt_bottom_r),
-    );
-
+  // Calculate hinge sizes
   hinge_total = hinge_count * 2 - 1;
   hinge_length = (l - radius * 2 - hinge_margin * 2 - (hinge_total - 1) * hinge_tolerance) / hinge_total;
   hinge_rod_length = hinge_length * hinge_total + hinge_tolerance * (hinge_total - 1);
 
-  // Attach hinges to the skirt
-  xcopies(spacing=(hinge_length + hinge_tolerance) * 2, n=hinge_count)
-    move([0, (w + hinge_d) / 2 + wall_t, h - skirt_tear_h])
-      rot([90, 180 + hinge_ang / 2, 90]) hinge(
-          l=hinge_length,
-          d=hinge_d,
-          hole_d=hinge_hole_d,
-          ang=hinge_ang,
-          direction=HINGE_BOX,
+  if (draw_box) {
+    // Main body
+    hollow_box(
+      l=l,
+      w=w,
+      h=h,
+      wt=wall_t,
+      ft=floor_t,
+      br=radius,
+      outer_top=box_top_profile,
+      outer_bottom=box_bottom_profile,
+    );
+
+    // Attach skirt
+    if (draw_hinges) {
+      up(h - skirt_tear_h - skirt_h)
+        skirt(
+          l=l + lid_wall_t * 2,
+          w=w + lid_wall_t * 2,
+          h=skirt_h,
+          t=lid_wall_t,
+          gl=grip_l,
+          br=radius + lid_wall_t,
+          bottom=os_teardrop(r=skirt_bottom_r),
         );
 
-  // Draw lid
-  lid_h = skirt_tear_h + box_bottom_r;
-  left(l + wall_t * 3)
-    union() {
-      // Main box of the lid
-      hollow_box(
-        l=l + wall_t * 2,
-        w=w + wall_t * 2,
-        h=lid_h,
-        br=radius + wall_t * 2,
-        wt=wall_t,
-        ft=lid_t,
-        outer_bottom=box_bottom_profile,
-        outer_top=os_chamfer(height=0.4),
-        //inner_top=os_chamfer(height=-1.2)
-      );
-
-      // Attach hinges
-      xcopies(spacing=(hinge_length + hinge_tolerance) * 2, n=hinge_count - 1)
-        move([0, -(w + hinge_d) / 2 - wall_t, lid_h])
-          rot([90, 180 - hinge_ang / 2, 90]) hinge(
+      // Attach hinges to the skirt
+      xcopies(spacing=(hinge_length + hinge_tolerance) * 2, n=hinge_count)
+        move([0, (w + hinge_d) / 2 + lid_wall_t, h - skirt_tear_h])
+          rot([90, 180 + hinge_ang / 2, 90]) hinge(
               l=hinge_length,
               d=hinge_d,
               hole_d=hinge_hole_d,
               ang=hinge_ang,
-              direction=HINGE_LID
+              direction=HINGE_BOX,
             );
-
-      // Attach a wedge
-      move([0, w / 2 + wall_t * 1.5, skirt_tear_h / 2 + box_bottom_r]) xrot(-90) diff()
-            wedge([grip_l, skirt_tear_h, wall_t], center=true)
-              attach("top_edge", FWD + LEFT, inside=true)
-                rounding_edge_mask(r=wall_t / 1.5, l=$edge_length + 1, $fn=32);
     }
 
-  intersection() {
-    union() { children(); }
+    intersection() {
+      union() { children(); }
 
-    rounded_box(
-      l=l, w=w, h=h,
-      br=radius,
-      top=box_top_profile,
-      bottom=box_bottom_profile,
-    );
+      union() {
+        rounded_box(
+          l=l, w=w, h=h+lid_oversize,
+          br=radius,
+          top=box_top_profile,
+          bottom=box_bottom_profile,
+        );
+      }
+    }
+  }
+
+  if (draw_lid) {
+    move_lid = (draw_box) ? l + wall_t * 3 : 0;
+
+    // Draw lid
+    lid_h = skirt_tear_h + box_bottom_r + lid_floor_t - lid_vertical_clearance + lid_oversize;
+    lid_outer_chamfer = 0.2;
+    inner_h = lid_h - lid_oversize - lid_floor_t;
+
+    left(move_lid)
+      union() {
+        // Main box of the lid
+        difference() {
+          hollow_box(
+            l=l + lid_tolerance + lid_wall_t * 2,
+            w=w + lid_tolerance + lid_wall_t * 2,
+            h=lid_h,
+            br=radius + (lid_tolerance + lid_wall_t * 2) / 2,
+            wt=wall_t + lid_wall_t,
+            ft=lid_floor_t,
+            outer_bottom=box_bottom_profile,
+            outer_top=os_chamfer(height=lid_outer_chamfer),
+          );
+
+          // Remove the insides
+          up(lid_floor_t + lid_oversize) // Bump it up for floor thickness
+            rounded_box(
+              l=l + lid_tolerance,
+              w=w + lid_tolerance,
+              h=inner_h + 0.01,
+              br=radius + lid_tolerance / 2,
+              top=os_chamfer(height=-0.6),
+            );
+        }
+
+        // Attach hinges
+        if (draw_hinges) {
+          xcopies(spacing=(hinge_length + hinge_tolerance) * 2, n=hinge_count - 1)
+            move([0, -(w + hinge_d + lid_tolerance) / 2 - lid_wall_t, lid_h])
+              rot([90, 180 - hinge_ang / 2, 90]) hinge(
+                  l=hinge_length,
+                  d=hinge_d,
+                  hole_d=hinge_hole_d,
+                  ang=hinge_ang,
+                  direction=HINGE_LID
+                );
+
+          // Attach a wedge
+          wedge_h = skirt_tear_h + lid_floor_t - lid_vertical_clearance - lid_outer_chamfer;
+          move(
+            [
+              0,
+              (w + lid_tolerance) / 2 + lid_wall_t * 1.5,
+              wedge_h / 2 + box_bottom_r + lid_oversize,
+            ]
+          )
+            xrot(-90) diff()
+                wedge([grip_l, wedge_h, lid_wall_t], center=true)
+                  attach("top_edge", FWD + LEFT, inside=true)
+                    rounding_edge_mask(r=lid_wall_t / 1.5, l=$edge_length + 1, $fn=32);
+        }
+      }
   }
 }
 

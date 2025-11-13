@@ -3,7 +3,7 @@ include <BOSL2/std.scad>
 HINGE_BOX = 1;
 HINGE_LID = -1;
 
-// A cuboid with roundings
+// A cuboid with rounding
 module rounded_box(
   l, // length along X axis
   w, // width along Y axis
@@ -13,7 +13,7 @@ module rounded_box(
   bottom // bottom chamfer
 ) {
   shape =
-    (br > 0) ? round_corners(rect([l, w]), radius=br, $fs=0.5, $fa=0.5)
+    (br > 0) ? round_corners(rect([l, w]), radius=br)
     : rect([l, w]);
 
   offset_sweep(
@@ -52,14 +52,14 @@ module hollow_box(
     // Remove the insides
     up(_ft) // Bump it up for floor thickness
       rounded_box(
-        l=l - wt * 2, w=w - wt * 2, h=h - ft + epsilon * 2, br=br - wt / 2,
+        l=l - wt * 2, w=w - wt * 2, h=h - ft + epsilon * 2, br=br - wt,
         top=inner_top,
         bottom=_inner_bottom
       );
   }
 }
 
-// A 3d teardrop with roundings and a cylindrical cutout
+// A 3d teardrop with rounding and a cylindrical cutout
 module hinge(
   l, // length of the hinge
   d = hinge_d, // outer diameter of the hinge
@@ -71,7 +71,7 @@ module hinge(
     // Sweep a teardrop2d instead of using plain teardrop
     // in order to have better control over chamfer function
     down(l / 2) offset_sweep(
-        teardrop2d(d=d, ang=ang / 2, $fn=20),
+        teardrop2d(d=d, ang=ang / 2),
         height=l,
         top=os_chamfer(0.4, angle=45),
         bottom=os_chamfer(0.4, angle=45),
@@ -81,7 +81,7 @@ module hinge(
     // to reduce the angle of overhangs
     zrot(180) xrot(90)
         yrot(direction * ang / 2)
-          teardrop(d=hole_d, h=l + 2, cap_h=0.6, $fn=32);
+          teardrop(d=hole_d, h=l + 2, cap_h=0.6);
   }
 }
 
@@ -109,8 +109,7 @@ module skirt(
             [(l - gl) / 2, t], // recess
             [(l - gl) / 2, 0], // recess
           ],
-          radius=[br, br, br, br, r2, r2, r2, r2],
-          $fs=0.5, $fa=0.5
+          radius=[br, br, br, br, r2, r2, r2, r2]
         ),
         height=h,
         steps=8, // chamfer steps

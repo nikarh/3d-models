@@ -5,7 +5,7 @@ include <../modules/box/v1.scad>
 box_v1(
   [168, 95, 16],
   grip_l=26,
-  lid_t=1.6,
+  lid_floor_t=1.6,
   hinge_count=3, hinge_margin=10
 ) {
   grid(size=[168, 95, 36], layout=[6, 1]);

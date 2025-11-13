@@ -24,8 +24,8 @@ floor_t = sizes[2]; // Main box floor thickness
 
 // Lid
 lid_oversize = 5;
-lid_tolerance = 0.6; // Make lid larger than a box in both X and Y axis by that amount
-lid_vertical_clearance = 0.8; // When closed, distance between boxes skirt and lids edges
+lid_tolerance = 0; // Make lid larger than a box in both X and Y axis by that amount
+lid_vertical_clearance = 0.4; // When closed, distance between boxes skirt and lids edges
 lid_floor_t = 1.6; // Lid floor thickness
 lid_wall_t = 0.8;
 
@@ -54,7 +54,7 @@ difference() {
     lid_vertical_clearance=lid_vertical_clearance,
     hinge_count=hinge_count,
     hinge_margin=hinge_margin,
-    draw=BOX + sizes[3],
+    draw=sizes[3],
   ) {
     move([l / 2 - wall_t - sep_t / 2 - insert_l, 0, h / 2])
       cuboid(

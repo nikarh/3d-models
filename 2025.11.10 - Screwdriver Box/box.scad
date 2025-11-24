@@ -45,8 +45,8 @@ difference() {
   box_v1(
     size=[l, w, h - lid_oversize],
     grip_l=grip_l,
-    wall_t=wall_t,
-    floor_t=floor_t,
+    box_wall_t=wall_t,
+    box_floor_t=floor_t,
     lid_wall_t=lid_wall_t,
     lid_floor_t=lid_floor_t,
     lid_tolerance=lid_tolerance,

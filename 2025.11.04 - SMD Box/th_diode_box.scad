@@ -4,7 +4,7 @@ include <../modules/box/v1.scad>
 // Through hole diode box
 box_v1(
   [168, 95, 16],
-  grip_l=26,
+  grip_tab_l=26,
   lid_floor_t=1.6,
   hinge_count=3, hinge_margin=10
 ) {

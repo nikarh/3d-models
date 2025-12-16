@@ -65,9 +65,30 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.11.10%20-%20Screwdriver%20Box/box_preview.png)
 
+### [esp32 screen case](2025.11.24%20-%20esp32%20screen%20case)
+
+![Preview](2025.11.24%20-%20esp32%20screen%20case/screen-case_preview.png)
+
+### [Pins](2025.11.26%20-%20Pins)
+
+![Preview](2025.11.26%20-%20Pins/pins_preview.png)
+
+### [Earplug Box](2025.12.04%20-%20Earplug%20Box)
+
+![Preview](2025.12.04%20-%20Earplug%20Box/earplug_box_preview.png)
+
+### [Bathroom Box](2025.12.16%20-%20Bathroom%20Box)
+
+![Preview](2025.12.16%20-%20Bathroom%20Box/bathroom-box_preview.png)
+
+### [Trimmer Box](2025.12.26%20-%20Trimmer%20Box)
+
+![Preview](2025.12.26%20-%20Trimmer%20Box/trimmer-box_preview.png)
+
 ### [Basil Cabinet/2025.10.24 - Nursery Pot Drainage](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage)
 
 ![Preview](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)
+![Preview](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_v2_preview.png)
 
 ### [Basil Cabinet/2025.10.26 - Air Intake Plug](Basil%20Cabinet/2025.10.26%20-%20Air%20Intake%20Plug)
 
@@ -82,6 +103,7 @@ This repository contains a collection of 3D models and designs created with Open
 ### [Basil Cabinet/2025.11.01 - Nursery Pot Stand](Basil%20Cabinet/2025.11.01%20-%20Nursery%20Pot%20Stand)
 
 ![Preview](Basil%20Cabinet/2025.11.01%20-%20Nursery%20Pot%20Stand/stand_preview.png)
+![Preview](Basil%20Cabinet/2025.11.01%20-%20Nursery%20Pot%20Stand/stand_v2_preview.png)
 
 ### [Basil Cabinet/2025.11.09 - Light Cap](Basil%20Cabinet/2025.11.09%20-%20Light%20Cap)
 

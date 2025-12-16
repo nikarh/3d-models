@@ -11,7 +11,7 @@ sizes = [28 + 0.8, 14, 0.8, LID];
 // Hinges & Grip
 hinge_count = 2;
 hinge_margin = 10;
-grip_l = 22; // length of a grip recess
+grip_tab_l = 22; // length of a grip recess
 
 // Box size
 wall_tolerance = 0.2; // Add this to main wall thickness (and ultimately size) to account for expansion due to recess
@@ -44,7 +44,7 @@ sep_t = 1.0; // Thickness of the inner wall/separator
 difference() {
   box_v1(
     size=[l, w, h - lid_oversize],
-    grip_l=grip_l,
+    grip_tab_l=grip_tab_l,
     box_wall_t=wall_t,
     box_floor_t=floor_t,
     lid_wall_t=lid_wall_t,

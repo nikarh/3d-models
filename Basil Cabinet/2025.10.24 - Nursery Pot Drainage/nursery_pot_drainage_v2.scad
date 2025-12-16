@@ -15,8 +15,8 @@ angle = atan2(h, (top_side - bot_side) / 2);
 thickness = 1.6;
 additional_thick = 1.2;
 
-lip_scale = 1.5;
-lip_d1 = 26;
+lip_scale = 1.7;
+lip_d1 = 25;
 lip_d2 = 5;
 lip_a = 90 - 30; // lip angle
 // lip_h = (lip_d1 * lip_scale - lip_d2 * lip_scale) / 2;

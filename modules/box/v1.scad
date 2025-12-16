@@ -8,7 +8,7 @@ HIDE_HINGES = 4;
 module box_v1(
   size,
   radius = 9, // outer radius
-  grip_l, // grip length for a finger to latch
+  grip_tab_l, // grip length for a finger to latch
   box_wall_t = 0.8, // wall thickness
   box_floor_t = 0.8, // floor thickness
   box_top_profile = os_chamfer(height=0.4), // offset sweep profile
@@ -25,6 +25,7 @@ module box_v1(
   hinge_count = 3, // number of hinges on main box
   hinge_margin = 0, // margin to the first hinge from the rounding of the box
   hinge_tolerance = 0.2, // space between each hinge edge
+  latch_h = 0,
   draw = BOX + LID,
 ) {
   draw_box = (draw % 2) >= BOX;
@@ -47,12 +48,12 @@ module box_v1(
   hinge_length = (l - radius * 2 - hinge_margin * 2 - (hinge_total - 1) * hinge_tolerance) / hinge_total;
   hinge_rod_length = hinge_length * hinge_total + hinge_tolerance * (hinge_total - 1);
 
-  wedge_ang = 90-50;
-  wedge_len = grip_l - 4;
-  wedge_hole_h = 0.6;
-  wedge_hole_base = 2 * wedge_hole_h * tan(wedge_ang);
-  wedge_h = wedge_hole_h + lid_tolerance;
-  wedge_base = 2 * wedge_h * tan(wedge_ang);
+  // Latch is designed to print well with overhangs
+  latch_ang = 45;
+  latch_len = grip_tab_l - 4;
+  latch_slot_h = latch_h + lid_tolerance;
+  latch_slot_base = 2 * latch_slot_h * tan(latch_ang);
+  latch_base = 2 * latch_h * tan(latch_ang);
 
   lid_outer_chamfer = 0.2;
   lid_inner_chamfer = 0.6;
@@ -73,12 +74,14 @@ module box_v1(
         outer_bottom=box_bottom_profile,
       );
 
-      hd = (lid_inner_h) - lid_vertical_clearance - lid_inner_chamfer - (wedge_base - wedge_hole_base) / 2;
-      color("red") move([0, -w / 2, h + wedge_hole_base / 2 - hd])
-          xrot(-90) prismoid(
-              size1=[wedge_len, wedge_hole_base],
-              size2=[wedge_len - wedge_hole_base, 0], h=wedge_hole_h
-            );
+      hd = (lid_inner_h) - lid_vertical_clearance - lid_inner_chamfer - (latch_base - latch_slot_base) / 2;
+
+      if (latch_h > 0)
+        color("red") move([0, -w / 2, h + latch_slot_base / 2 - hd])
+            xrot(-90) prismoid(
+                size1=[latch_len, latch_slot_base],
+                size2=[latch_len - latch_slot_base, 0], h=latch_slot_h
+              );
     }
 
     // Attach skirt
@@ -89,7 +92,7 @@ module box_v1(
           w=w + lid_wall_t * 2,
           h=skirt_h,
           t=lid_wall_t,
-          gl=grip_l,
+          gl=grip_tab_l,
           br=radius + lid_wall_t,
           bottom=os_teardrop(r=skirt_bottom_r),
         );
@@ -162,26 +165,27 @@ module box_v1(
                   direction=HINGE_LID
                 );
 
-          // Attach a wedge
-          outer_wedge_h = skirt_tear_h + lid_floor_t - lid_vertical_clearance - lid_outer_chamfer;
+          // Attach a pull_tab
+          grip_tab_h = skirt_tear_h + lid_floor_t - lid_vertical_clearance - lid_outer_chamfer;
           move(
             [
               0,
               (w + lid_tolerance) / 2 + lid_wall_t * 1.5,
-              outer_wedge_h / 2 + box_bottom_r + lid_oversize,
+              grip_tab_h / 2 + box_bottom_r + lid_oversize,
             ]
           )
             xrot(-90) diff()
-                wedge([grip_l, outer_wedge_h, lid_wall_t], center=true)
+                wedge([grip_tab_l, grip_tab_h, lid_wall_t], center=true)
                   attach("top_edge", FWD + LEFT, inside=true)
                     rounding_edge_mask(r=lid_wall_t / 1.5, l=$edge_length + 1, $fn=32);
 
           // Attach an inner wedge
-          color("red") move([0, w / 2, lid_h - lid_inner_chamfer - wedge_base / 2])
-              xrot(90) prismoid(
-                  size1=[wedge_len, wedge_base],
-                  size2=[wedge_len - wedge_base, 0], h=wedge_h
-                );
+          if (latch_h > 0)
+            color("red") move([0, w / 2, lid_h - lid_inner_chamfer - latch_base / 2])
+                xrot(90) prismoid(
+                    size1=[latch_len, latch_base],
+                    size2=[latch_len - latch_base, 0], h=latch_h
+                  );
         }
       }
   }

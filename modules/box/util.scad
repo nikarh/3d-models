@@ -9,11 +9,12 @@ module rounded_box(
   w, // width along Y axis
   h, // height along Z axis
   br = 0, // border radii top down view
+  br_vec = [1, 1, 1, 1], // border radii vector
   top, // top chamfer
   bottom // bottom chamfer
 ) {
   shape =
-    (br > 0) ? round_corners(rect([l, w]), radius=br)
+    (br > 0) ? round_corners(rect([l, w]), radius=br*br_vec)
     : rect([l, w]);
 
   offset_sweep(
@@ -32,6 +33,7 @@ module hollow_box(
   wt, // wall thickness
   ft, // floor thickness
   br = 0, //  border radii top down view
+  br_vec = [1, 1, 1, 1], // border radii vector
   outer_top = undef, // outer top chamfer
   inner_top = undef, // inner top chamfer
   outer_bottom = undef, // outer bottom chamfer
@@ -45,14 +47,14 @@ module hollow_box(
   difference() {
     // Body of the box
     rounded_box(
-      l=l, w=w, h=h, br=br,
+      l=l, w=w, h=h, br=br, br_vec=br_vec,
       top=outer_top, bottom=outer_bottom
     );
 
     // Remove the insides
     up(_ft) // Bump it up for floor thickness
       rounded_box(
-        l=l - wt * 2, w=w - wt * 2, h=h - ft + epsilon * 2, br=br - wt,
+        l=l - wt * 2, w=w - wt * 2, h=h - ft + epsilon * 2, br=br - wt, br_vec = br_vec,
         top=inner_top,
         bottom=_inner_bottom
       );
@@ -91,7 +93,7 @@ module skirt(
   w, // width of the skirt
   h, // height of the skirt
   t, // thickness of the skirt
-  gl, // length of a recess
+  gl, // length of a recess for grip tab
   br = 0, // border radius of the skirt
   bottom = undef, // outer bottom chamfer
 ) {

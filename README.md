@@ -85,6 +85,10 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.12.26%20-%20Trimmer%20Box/trimmer-box_preview.png)
 
+### [Hall Box](2025.12.29%20-%20Hall%20Box)
+
+![Preview](2025.12.29%20-%20Hall%20Box/hall-box_preview.png)
+
 ### [Basil Cabinet/2025.10.24 - Nursery Pot Drainage](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage)
 
 ![Preview](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage/nursery_pot_drainage_preview.png)

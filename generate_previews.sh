@@ -2,6 +2,10 @@
 
 set -e
 
+export QT_QPA_PLATFORM=xcb
+export LIBGL_ALWAYS_SOFTWARE=1
+export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
+
 # Generate previews for all .scad files
 echo "Generating previews..."
 find . -type f -name "*.scad" ! -path "*/modules/*" -print0 | while IFS= read -r -d '' file; do
@@ -15,7 +19,7 @@ find . -type f -name "*.scad" ! -path "*/modules/*" -print0 | while IFS= read -r
                 --enable predictible-output \
                 --backend Manifold \
                 --render=true \
-                --view=axes || true
+                --view=axes
                 # --colorscheme=BeforeDawn \
                 # --view=axes,edges
         fi

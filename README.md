@@ -81,6 +81,10 @@ This repository contains a collection of 3D models and designs created with Open
 
 ![Preview](2025.12.16%20-%20Bathroom%20Box/bathroom-box_preview.png)
 
+### [Cap](2025.12.26%20-%20Cap)
+
+![Preview](2025.12.26%20-%20Cap/cap_preview.png)
+
 ### [Trimmer Box](2025.12.26%20-%20Trimmer%20Box)
 
 ![Preview](2025.12.26%20-%20Trimmer%20Box/trimmer-box_preview.png)
@@ -88,6 +92,34 @@ This repository contains a collection of 3D models and designs created with Open
 ### [Hall Box](2025.12.29%20-%20Hall%20Box)
 
 ![Preview](2025.12.29%20-%20Hall%20Box/hall-box_preview.png)
+
+### [Audio Rack](2026.01.20%20-%20Audio%20Rack)
+
+![Preview](2026.01.20%20-%20Audio%20Rack/audio-rack_preview.png)
+
+### [Toothbrushes](2026.01.24%20-%20Toothbrushes)
+
+![Preview](2026.01.24%20-%20Toothbrushes/toothbrushes_preview.png)
+
+### [Grid](2026.01.26%20-%20Grid)
+
+![Preview](2026.01.26%20-%20Grid/grid_preview.png)
+
+### [Quest 2 Smaller box](2026.01.30%20-%20Quest%202%20Smaller%20box)
+
+![Preview](2026.01.30%20-%20Quest%202%20Smaller%20box/quest2_preview.png)
+
+### [Switch Mount](2026.02.18%20-%20Switch%20Mount)
+
+![Preview](2026.02.18%20-%20Switch%20Mount/switch_mount_preview.png)
+
+### [PSU Bracket](2026.04.08%20-%20PSU%20Bracket)
+
+![Preview](2026.04.08%20-%20PSU%20Bracket/psu%20bracket_preview.png)
+
+### [Switch Rack](2026.06.06%20-%20Switch%20Rack)
+
+![Preview](2026.06.06%20-%20Switch%20Rack/switch-rack_preview.png)
 
 ### [Basil Cabinet/2025.10.24 - Nursery Pot Drainage](Basil%20Cabinet/2025.10.24%20-%20Nursery%20Pot%20Drainage)
 

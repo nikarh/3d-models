@@ -15,7 +15,7 @@ find . -type f -name "*.scad" ! -path "*/modules/*" -print0 | while IFS= read -r
                 --enable predictible-output \
                 --backend Manifold \
                 --render=true \
-                --view=axes
+                --view=axes || true
                 # --colorscheme=BeforeDawn \
                 # --view=axes,edges
         fi
